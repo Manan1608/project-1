@@ -1,15 +1,17 @@
 import axios from "axios";
-import {UserContextProvider} from "./UserContext";
+import { UserContextProvider } from "./UserContext";
 import Routes from "./Routes";
 
+// Set axios defaults once at module load time
+axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.withCredentials = true;
+
 function App() {
-  axios.defaults.baseURL = 'http://localhost:4000';
-  axios.defaults.withCredentials = true;
   return (
     <UserContextProvider>
       <Routes />
     </UserContextProvider>
-  )
+  );
 }
 
-export default App
+export default App;

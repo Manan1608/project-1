@@ -1,16 +1,18 @@
 import RegisterAndLoginForm from "./RegisterAndLoginForm.jsx";
-import {useContext} from "react";
-import {UserContext} from "./UserContext.jsx";
+import { useContext } from "react";
+import { UserContext } from "./UserContext.jsx";
 import Chat from "./Chat";
 
 export default function Routes() {
-  const {username, id} = useContext(UserContext);
+  const { username, loading } = useContext(UserContext);
 
-  if (username) {
-    return <Chat />;
+  if (loading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <p className="text-gray-500 text-lg">Loading...</p>
+      </div>
+    );
   }
 
-  return (
-    <RegisterAndLoginForm />
-  );
+  return username && username.trim() !== "" ? <Chat /> : <RegisterAndLoginForm />;
 }
